@@ -229,6 +229,17 @@
   tags:
     - install
     - install:app-requirements
+
+- name: patch htmlacademy xblock studentmodule
+  lineinfile: >
+    dest="/edx/app/edxapp/venvs/edxapp/src/ifmo-xblock-htmlacademy/xblock_htmlacademy/xblock_academy_core.py"
+    regexp="from lms.djangoapps.courseware.models import StudentModule"
+    line="from courseware.models import StudentModule"
+  become_user: "{{ edxapp_user }}"
+  tags:
+    - install
+    - install:app-requirements
+
     
 # If using CAS and you have a function for mapping attributes, install
 # the module here.  The next few tasks set up the python code sandbox
